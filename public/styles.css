@@ -1,0 +1,583 @@
+.page {
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.link-none {
+    text-decoration: none;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.error {
+    color: #ff4f4f;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 0.7em;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding-bottom: 5vh;
+}
+
+.home-header-wrapper {
+    background-image: url("./media/homepage_background.jpg");
+}
+
+.photo-header-wrapper, .dirs-header-wrapper {
+    background-color: #172031;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100vw - 60px);
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+
+}
+
+.logo-name {
+    margin-top: 0;
+    margin-bottom: 1vh;
+    color: #ffffff;
+    font-size: 2em;
+    font-family: Chalkboard, serif;
+}
+
+.nav-link {
+    margin-right: 15px;
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.3em;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.login {
+    margin: 0;
+    color: #ffffff;
+    font-size: 2em;
+    font-family: Copperplate, serif;
+}
+
+.login-icon {
+    margin-left: 10px;
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.home-content {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.photo-content {
+    width: 100vw;
+    display: flex;
+    flex-grow: 1;
+    background-color: #172031;
+    padding-bottom: 30px;
+    border-bottom: 1px solid white;
+}
+
+.dirs-content {
+    width: 100vw;
+    display: flex;
+    flex-grow: 1;
+    background-color: #172031;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    flex-wrap: wrap;
+    padding: 30px 0;
+}
+
+.headline {
+    margin-top: 15vh;
+    width: 75vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin-top: 0;
+    margin-bottom: 1vh;
+    color: #ffffff;
+    font-size: 2em;
+    font-family: Copperplate, serif;
+}
+
+.subtitle {
+    margin-top: 0;
+    margin-bottom: 3vh;
+    color: #ffffff;
+    font-size: 1em;
+    font-family: "Apple SD Gothic Neo", serif;
+}
+
+.search {
+    width: 75vw;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    display: flex;
+}
+
+.photo-search {
+    width: calc(100vw - 60px);
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    display: flex;
+    margin-top: 30px;
+}
+
+.search-lbl {
+    display: flex;
+    flex-grow: 1;
+}
+
+.search-input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 25px 0 0 25px;
+    flex-grow: 1;
+    color: #172031;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.2em;
+    padding: 0 20px;
+}
+
+.search-btn {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0 25px 25px 0;
+    color: #172031;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.25em;
+    padding: 0 20px;
+}
+
+.tags {
+    margin: 20px 0;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 75vw;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.tag {
+    margin: 0 15px 0 0;
+    padding: 10px 17px;
+    background-color: #172031;
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+.images {
+    width: calc(100vw - 20px);
+    column-count: 4;
+    column-gap: 10px;
+    /*border-radius: 8px;*/
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.image {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.pagination {
+    margin: 20px 0 40px 0;
+    display: flex;
+}
+
+.page-link {
+    margin: 0 7px;
+    width: 30px;
+    height: 30px;
+    background-color: #172031;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-link-text {
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+    margin: auto;
+}
+
+.footer {
+    display: flex;
+    min-height: 10vh;
+    background-color: #172031;
+    padding: 2vh 5vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy-rights {
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 0.7em;
+}
+
+.follow-us {
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.3em;
+}
+
+.logo-wrapper, .copy-rights-wrapper, .follow-us-wrapper {
+    width: 30vw;
+    display: flex;
+}
+
+.copy-rights-wrapper {
+    justify-content: center;
+}
+
+.follow-us-wrapper {
+    justify-content: flex-end;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #172031;
+}
+
+.login-wrapper {
+    width: 30vw;
+    background-color: white;
+    margin-top: 40px;
+    border-radius: 25px;
+    padding: 40px;
+}
+
+.main-header {
+    color: #1e1f22;
+    font-weight: 500;
+    font-size: 2em;
+    font-family: Copperplate, serif;
+    margin-top: 10px;
+}
+
+.main-header-bottom {
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(148, 152, 166, 0.44);
+}
+
+.login-lbl {
+    color: #1e1f22;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+}
+
+.login-inp {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #1e1f22;
+    box-shadow: none;
+    margin: 5px 0 30px 0;
+    padding-left: 0;
+}
+
+.login-btn {
+    margin: 20px 0;
+    padding: 10px 0;
+    border: none;
+    border-radius: 15px;
+    background-color: #172031;
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: rgba(23, 32, 49, 0.82);
+}
+
+.login-switch {
+    color: #1e1f22;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 0.7em;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.login-switch-link {
+    color: #0a005f;
+    cursor: pointer;
+}
+
+.login-switch-link:hover {
+    color: rgba(9, 0, 95, 0.5);
+}
+
+.photo-picture {
+    flex-grow: 1;
+    margin-right: 20px;
+    max-height: 100vh;
+    justify-content: center;
+    align-items: flex-start;
+    display: flex;
+    margin-left: 30px;
+}
+
+.photo-img {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 5px;
+}
+
+.photo-panel {
+    margin-right: 30px;
+    width: 25vw;
+    background-color: #fff;
+    border-radius: 25px;
+    height: min-content;
+    position: sticky;
+    top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-panel-download-btn {
+    padding: 10px 0;
+    border-radius: 15px;
+    background-color: #172031;
+    text-align: center;
+    color: #ffffff;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+}
+
+.photo-panel-download-btn:hover {
+    background-color: rgba(23, 32, 49, 0.82);
+}
+
+.photo-panel-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(148, 152, 166, 0.44);
+}
+
+.photo-panel-action {
+    padding: 10px 0;
+    border-radius: 15px;
+    border: 2px solid #172031;
+    background-color: #ffffff;
+    text-align: center;
+    color: #172031;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 47%;
+}
+
+.photo-panel-action:hover {
+    background-color: #172031;
+    color: #ffffff;
+}
+
+.photo-panel-user {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.photo-panel-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.photo-panel-name {
+    color: #1e1f22;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.photo-panel-description {
+    color: #1e1f22;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 0.9em;
+}
+
+.folder {
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 0 30px;
+}
+
+.folder-icon {
+    font-size: 9em;
+}
+
+.folder-name {
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1em;
+    margin: 0;
+}
+
+.add-folder {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed white;
+    border-radius: 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    cursor: pointer;
+}
+
+.upload {
+    display: flex;
+    position: absolute;
+    width: 36vw;
+    height: 60vh;
+    margin: 20vh 32vw;
+    background-color: white;
+    border-radius: 25px;
+}
+
+@media screen and (max-width: 1200px) {
+    .images {
+        column-count: 3;
+    }
+
+    .login-wrapper {
+        width: 37vw;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .images {
+        column-count: 2;
+    }
+
+    .footer {
+        flex-wrap: wrap;
+    }
+
+    .logo-wrapper, .copy-rights-wrapper, .follow-us-wrapper {
+        width: 90vw;
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-wrapper {
+        width: 50vw;
+    }
+
+    .photo-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .photo-picture {
+        margin: 0;
+        width: calc(100vw - 60px);
+    }
+
+    .photo-panel {
+        margin: 20px 0 0 0;
+        width: calc(100vw - 100px);
+    }
+
+    .upload {
+        width: calc(100vw - 100px);
+        margin: 20vh 50px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .images {
+        column-count: 1;
+    }
+
+    .login-wrapper {
+        width: calc(90vw - 40px);
+        padding: 20px;
+    }
+}

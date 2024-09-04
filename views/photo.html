@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
+    <title>Photo</title>
+</head>
+<body class="page">
+<div class="header-wrapper photo-header-wrapper">
+    <div class="header">
+        <div class="logo">
+            <img src="../media/logo.png" class="logo-image">
+            <p class="logo-name">MediaBrowser</p>
+        </div>
+        <div class="account">
+            <!--            <img src="media/profile_default.png" class="profile-photo">-->
+            <p class="login">Log In</p>
+            <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+        </div>
+    </div>
+    <form class="photo-search">
+        <input class="search-input" placeholder="search..." type="search" name="searchInput">
+        <button class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+</div>
+<div class="photo-content">
+    <div class="photo-picture">
+        <img class="photo-img" src="../media/images/{{image}}" alt="">
+    </div>
+    <div class="photo-panel">
+        <a class="photo-panel-download-btn">Download</a>
+        <div class="photo-panel-actions">
+            <a class="photo-panel-action">
+                <i class="fa-regular fa-heart"></i>
+                100
+            </a>
+            <a class="photo-panel-action">
+                <i class="fa-regular fa-bookmark"></i>
+                Save
+            </a>
+        </div>
+        <div class="photo-panel-user">
+            <img class="photo-panel-img" src="../media/profile_default.png" alt="">
+            <p class="photo-panel-name">Helmut Becker</p>
+        </div>
+        <p class="photo-panel-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis lacinia libero nec aliquet.
+            Sed tincidunt eros eget leo dapibus, in viverra felis pretium. Ut non orci consequat, venenatis massa.
+        </p>
+    </div>
+</div>
+<div class="footer">
+    <div class="logo-wrapper">
+        <div class="logo">
+            <img src="../media/logo.png" class="logo-image">
+            <p class="logo-name">MediaBrowser</p>
+        </div>
+    </div>
+    <div class="copy-rights-wrapper">
+        <p class="copy-rights">&copy; MediaBrowser 2024. All rights reserved.</p>
+    </div>
+    <div class="follow-us-wrapper">
+        <p class="follow-us">
+            follow us |
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-square-x-twitter"></i>
+            <i class="fa-brands fa-square-pinterest"></i>
+        </p>
+    </div>
+</div>
+</body>
+</html>
