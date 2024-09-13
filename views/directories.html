@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="styles.css" rel="stylesheet">
+    <link href="../styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
@@ -11,30 +11,54 @@
 <div class="header-wrapper dirs-header-wrapper">
     <div class="header">
         <div class="logo">
-            <img src="media/logo.png" class="logo-image">
+            <img src="../media/logo.png" class="logo-image">
             <p class="logo-name">MediaBrowser</p>
         </div>
         <div class="account">
-            <!--            <img src="media/profile_default.png" class="profile-photo">-->
-            <p class="login">Log In</p>
-            <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+            {% if isAdmin %}
+                <a class="nav-link link-none" href="#">Administration</a>
+            {% endif %}
+            {% if isUser %}
+                <a class="nav-link link-none" href="#">My Media</a>
+            {% endif %}
+            {% if isLogin %}
+                <img src="../media/profile_default.png" class="profile-photo">
+            {% else %}
+                <a class="link-none row" href="http://localhost:5010/login/">
+                    <p class="login">Log In</p>
+                    <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+                </a>
+            {% endif %}
         </div>
+    </div>
+    <div class="utils">
+        <div class="path">
+            <a href="#" class="path-link link-none">root/</a>
+        </div>
+        <a class="upload-btn link-none" href="#">
+            Upload Media 
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </a>
     </div>
 </div>
 <div class="dirs-content">
-    <div class="folder">
-        <i class="fa-regular fa-folder folder-icon"></i>
-        <p class="folder-name folder-name">Summer 2024</p>
-    </div>
+
+    {% forEach folders %}
+        <div class="folder">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <p class="folder-name folder-name">{{name}}</p>
+        </div>
+    {% endforEach %}
+    
     <div class="add-folder">
         <i class="fa-solid fa-plus"></i>
     </div>
 </div>
-<div class="upload"></div>
+<!-- <div class="upload"></div> -->
 <div class="footer">
     <div class="logo-wrapper">
         <div class="logo">
-            <img src="media/logo.png" class="logo-image">
+            <img src="../media/logo.png" class="logo-image">
             <p class="logo-name">MediaBrowser</p>
         </div>
     </div>

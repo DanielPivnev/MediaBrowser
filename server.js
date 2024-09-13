@@ -16,5 +16,6 @@ server.use(cookie.parser)
 
 server.use("/", require("./routes/main"));
 server.use("/images", require("./routes/photos"));
+server.use("/users", require("./routes/users"));
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

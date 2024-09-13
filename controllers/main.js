@@ -3,6 +3,7 @@
 require("dotenv").config();
 const bcrypt = require('bcrypt');
 
+const Folder = require("../models/Folder");
 const Media = require("../models/Media");
 const Users = require("../models/Users");
 const crypto = require("../utils/Cryptography");
@@ -88,6 +89,7 @@ exports.registrationPost = async (req, res) => {
     if (!(await Users.exists(email)) && password1 === password2) {
         bcrypt.hash(password1, +process.env.SALT_ROUNDS, async (err, hash) => {
             await Users.add(email, hash);
+            await Folder.addRoot(await Users.getID(email));
         });
 
         res.redirect("/login");

@@ -32,12 +32,6 @@ exports.joinPath = (...parts) => {
 
 exports.renderPage = (templatePath, data) => {
     let template = fs.readFileSync(templatePath, "utf8");
-
-    template = template.replace(/\{\{(\w+)\}\}/g, (match, variable) => {
-        return data[variable] || "";
-    });
-
-    template = handleIfElse(template, data);
     
     template = template.replace(/\{\% forEach (\w+) \%\}([\s\S]*?)\{\% endforEach \%\}/g, (match, arrayName, loopBlock) => {
         const items = data[arrayName];
@@ -51,9 +45,15 @@ exports.renderPage = (templatePath, data) => {
                 itemBlock = handleIfElse(itemBlock, item);
 
                 return itemBlock;
-            }).join("''");
+            }).join("");
         }
         return "";
+    });
+
+    template = handleIfElse(template, data);
+
+    template = template.replace(/\{\{(\w+)\}\}/g, (match, variable) => {
+        return data[variable] || "";
     });
 
     return template;

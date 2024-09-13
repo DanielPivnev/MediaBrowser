@@ -1,3 +1,5 @@
+"use strict";
+
 const db = require("../config/db");
 
 class Media {
@@ -18,6 +20,7 @@ class Media {
             console.log(error)
         }
     }
+    
     static async getPhotoById(id) {
         const sql = `
             SELECT media FROM media WHERE id=${id};
@@ -37,7 +40,6 @@ class Media {
             console.log(error)
         }
     }
-    static async save() {}
 }
 
 module.exports = Media;

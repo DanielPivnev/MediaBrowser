@@ -49,6 +49,21 @@ class Users {
         }
     }
 
+    static async getIDByToken(token) {
+        const date = new Date();
+        const sql = `
+            SELECT * FROM session WHERE token = '${token}' AND expires >= '${render.dateToMySQL(date)}';
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+
+            return rows[0].user_id;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static async logIn(token, date, id) {
         const sql = `
             INSERT INTO session (token, expires, user_id) VALUES ('${token}', '${date}', ${id});
