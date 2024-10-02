@@ -10,6 +10,7 @@ class Folder {
 
         try {
             await db.execute(sql);
+            await Folder.addFolder("saves", await Folder.getRootID(userID), userID)
         } catch (error) {
             console.log(error)
         }

@@ -68,8 +68,8 @@
 <div class="home-content">
     <div class="images">
         {% forEach images %}
-            <a href="/images/{{id}}">
-                <img src="media/images/{{media}}" class="image" alt="">
+            <a href="/images/{?id?}">
+                <img src="media/images/{?media?}" class="image" alt="">
             </a>
         {% endforEach %}
     </div>

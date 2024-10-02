@@ -124,6 +124,46 @@ class Users {
             console.log(error)
         }
     }
+    
+    static async like(mediaID, userID) {
+        const sqlLook = `
+            SELECT * FROM likes WHERE media_id=${mediaID} AND user_id=${userID};
+        `;
+        const sqlAdd = `
+            INSERT INTO likes (media_id, user_id) VALUES (${mediaID}, ${userID});
+        `;
+        const sqlRemove = `
+            DELETE FROM likes WHERE (media_id = ${mediaID}) and (user_id = ${userID});
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sqlLook);
+
+            if (rows.length > 0) 
+                await db.execute(sqlRemove);
+            else 
+                await db.execute(sqlAdd);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async liked(mediaID, userID) {
+        const sqlLook = `
+            SELECT * FROM likes WHERE media_id=${mediaID} AND user_id=${userID};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sqlLook);
+
+            if (rows.length > 0) 
+                return "like";
+            else 
+                return "no-like";
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 module.exports = Users;

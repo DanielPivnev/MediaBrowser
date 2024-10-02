@@ -39,7 +39,7 @@ exports.renderPage = (templatePath, data) => {
             return items.map(item => {
                 let itemBlock = loopBlock;
                 
-                itemBlock = itemBlock.replace(/\{\{(\w+)\}\}/g, (match, variable) => {
+                itemBlock = itemBlock.replace(/\{\?(\w+)\?\}/g, (match, variable) => {
                     return item[variable] || "";
                 });
                 itemBlock = handleIfElse(itemBlock, item);
@@ -57,4 +57,19 @@ exports.renderPage = (templatePath, data) => {
     });
 
     return template;
+}
+
+
+exports.splitBuffer = (buffer, separator) => {
+    let parts = [];
+    let start = 0;
+    let index;
+  
+    while ((index = buffer.indexOf(separator, start)) !== -1) {
+      parts.push(buffer.slice(start, index));
+      start = index + separator.length;
+    }
+  
+    parts.push(buffer.slice(start));
+    return parts;
 }

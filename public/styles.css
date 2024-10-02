@@ -6,6 +6,14 @@
     flex-direction: column;
 }
 
+.show {
+    display: flex;
+}
+
+.hide {
+    display: none;
+}
+
 .link-none {
     text-decoration: none;
 }
@@ -131,6 +139,7 @@
     border-top: 1px solid white;
     flex-wrap: wrap;
     padding: 30px 0;
+    align-items: start;
 }
 
 .headline {
@@ -438,9 +447,7 @@
     padding: 10px 0;
     border-radius: 15px;
     border: 2px solid #172031;
-    background-color: #ffffff;
     text-align: center;
-    color: #172031;
     font-family: "Apple SD Gothic Neo", serif;
     font-size: 1em;
     text-transform: uppercase;
@@ -448,9 +455,24 @@
     width: 47%;
 }
 
-.photo-panel-action:hover {
+.no-like {
+    background-color: #ffffff;
+    color: #172031;
+}
+
+.no-like:hover {
     background-color: #172031;
     color: #ffffff;
+}
+
+.like {
+    background-color: #172031;
+    color: #ffffff;
+}
+
+.like:hover {
+    background-color: #ffffff;
+    color: #172031;
 }
 
 .photo-panel-user {
@@ -479,8 +501,6 @@
 }
 
 .folder {
-    width: 200px;
-    height: 200px;
     border-radius: 25px;
     color: white;
     display: flex;
@@ -491,6 +511,22 @@
     margin: 0 30px;
 }
 
+.folder-icon-wrapper {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.img-wrapper {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .folder-icon {
     font-size: 9em;
 }
@@ -499,6 +535,12 @@
     font-family: "Apple SD Gothic Neo", serif;
     font-size: 1em;
     margin: 0;
+}
+
+.dirs-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
 }
 
 .add-folder {
@@ -514,14 +556,127 @@
     cursor: pointer;
 }
 
-.upload {
-    display: flex;
+.upload-wrapper {
     position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.333);
+}
+
+.upload {
     width: 36vw;
-    height: 60vh;
-    margin: 20vh 32vw;
+    margin: auto;
     background-color: white;
     border-radius: 25px;
+    flex-direction: column;
+}
+
+.upload-header {
+    display: flex;
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: #1e1f22;
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 1.3em;
+    flex-direction: row;
+}
+
+.upload-content {
+    display: flex;
+    width: calc(100% - 40px);
+    padding: 30px 20px 0 20px;
+}
+
+.dirs-tags {
+    margin: 0 0 30px 0;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.upload-cancel {
+    background-color: transparent;
+    border: none;
+    color: #1e1f22;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.dirs-tag {
+    margin: 0 15px 0 0;
+    padding: 10px 17px;
+    color: #172031;
+    font-family: "Apple SD Gothic Neo", serif;
+    border-radius: 3px;
+    border: 1px solid #172031;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.dirs-tag:hover, .dirs-tag-active {
+    background-color: #172031;
+    color: #ffffff;
+}
+
+.textarea-inp {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #1e1f22;
+    box-shadow: none;
+    margin: 5px 0 30px 0;
+    padding-left: 0;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 250px;
+    color: #172031;
+    font-family: "Apple SD Gothic Neo", serif;
+}
+
+.file-inp {
+    display: flex;
+    border-bottom: 1px solid #1e1f22;
+    box-shadow: none;
+    margin: 5px 0 30px 0;
+    padding-left: 0;
+    color: hsla(219, 36%, 14%, 0.7);
+    font-family: "Apple SD Gothic Neo", serif;
+}
+
+.file-inp span {
+    font-size: 0.9em;
+    margin-left: 6px;
+}
+
+.file-inp-active {
+    color: #172031;
+}
+
+.checkbox {
+    display: flex;
+    width: 100%;
+}
+
+.checkbox p {
+    color: hsla(219, 36%, 14%, 0.7);
+    font-family: "Apple SD Gothic Neo", serif;
+    font-size: 0.9em;
+    margin-left: 6px;
+}
+
+.checkbox input {
+    border: 1px solid #1e1f22;
+}
+
+.checkbox input:checked + p {
+    /* accent-color: #172031; */
+    color: #172031;
 }
 
 .utils {
@@ -530,6 +685,10 @@
     align-items: flex-end;
     width: 100%;
     padding: 20px 30px;
+}
+
+.path {
+    display: flex;
 }
 
 .path-link {
@@ -549,6 +708,8 @@
     font-family: "Apple SD Gothic Neo", serif;
     font-size: 1em;
     color: #172031;
+    cursor: pointer;
+    border: none;
 }
 
 .upload-btn:hover {
