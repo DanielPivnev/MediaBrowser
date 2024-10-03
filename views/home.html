@@ -35,15 +35,15 @@
         <p class="title">Stunning royalty-free images & royalty-free stock</p>
         <p class="subtitle">Over 4.4 million+ high quality stock images shared by our talented community.</p>
     </div>
-    <form class="search">
-        <input class="search-input" placeholder="search..." type="search" name="searchInput">
-        <button class="search-btn">
+    <form class="search" id="searchForm">
+        <input class="search-input" placeholder="search..." id="searchInput" type="search" name="searchInput">
+        <button class="search-btn" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </form>
     <div class="tags">
         {% forEach tags %}
-            <a class="tag link-none {?isSelected?}" href="/?tags={{tagsQuery}}{?id?}">{?name?}</a>
+            <a class="tag link-none {?isSelected?}" href="/?{{tagsQuery}}{?id?}{{searchQuery}}">{?name?}</a>
         {% endforEach %}
     </div>
 </div>
@@ -99,5 +99,29 @@
         </p>
     </div>
 </div>
+
+<script>
+    const searchINP = document.getElementById("searchInput");
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.get("search"))
+        searchINP.value = queryParams.get("search");
+
+    document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+        
+        const searchTerm = searchINP.value;
+        let newUrl = window.location.origin + window.location.pathname;
+
+        if (searchTerm.length)
+            newUrl = `${newUrl}?search=${encodeURIComponent(searchTerm)}`;
+        if (queryParams.get("tags") && searchTerm.length)
+            newUrl = `${newUrl}&tags=${queryParams.get("tags")}`;
+        else if (queryParams.get("tags"))
+            newUrl = `${newUrl}?tags=${queryParams.get("tags")}`;
+
+        window.location.href = newUrl;
+    });
+</script>
+
 </body>
 </html>

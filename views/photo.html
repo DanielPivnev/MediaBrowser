@@ -31,8 +31,8 @@
             {% endif %}
         </div>
     </div>
-    <form class="photo-search">
-        <input class="search-input" placeholder="search..." type="search" name="searchInput">
+    <form class="photo-search" id="searchForm">
+        <input class="search-input" id="searchInput" placeholder="search..." type="search" name="searchInput">
         <button class="search-btn">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -86,5 +86,22 @@
         </p>
     </div>
 </div>
+
+<script>
+    const searchINP = document.getElementById("searchInput");
+
+    document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+        
+        const searchTerm = searchINP.value;
+        let newUrl = window.location.origin + "/";
+
+        if (searchTerm.length)
+            newUrl = `${newUrl}?search=${encodeURIComponent(searchTerm)}`;
+
+        window.location.href = newUrl;
+    });
+</script>
+
 </body>
 </html>

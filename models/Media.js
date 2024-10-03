@@ -6,7 +6,7 @@ const Folder = require("./Folder");
 class Media {
     static async getPublic() {
         const sql = `
-            SELECT media, id FROM media WHERE public=TRUE;
+            SELECT media, id, name, description FROM media WHERE public=TRUE;
         `;
 
         try {

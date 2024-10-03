@@ -16,8 +16,17 @@ exports.main = async (req, res) => {
         isLogin: false,
         isAdmin: false,
         isUser: false,
-        tagsQuery: ""
+        tagsQuery: "",
+        searchQuery: ""
     };
+
+    if (req.query.search && req.query.search.length) {
+        context.images = context.images.filter(image => 
+            image.name.toLowerCase().includes(req.query.search.toLowerCase()) || 
+            image.description.toLowerCase().includes(req.query.search.toLowerCase())
+        );
+        context.searchQuery = `&search=${req.query.search}`;
+    }
 
     if (req.query.tags) {
         const selectedTags = req.query.tags.split(";");
@@ -51,6 +60,7 @@ exports.main = async (req, res) => {
                         if (+selectedTag === tag && !selected) {
                             selectedImgs.push(img);
                             selected = true;
+                            console.log("s")
                         }
                     })
                 })
@@ -63,6 +73,7 @@ exports.main = async (req, res) => {
         });
     }
 
+    context.tagsQuery = "tags=" + context.tagsQuery;
 
     const token = req.cookies["session-token"];
     if (token && await Users.checkLogin(token)) {
