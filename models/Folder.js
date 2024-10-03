@@ -10,7 +10,7 @@ class Folder {
 
         try {
             await db.execute(sql);
-            await Folder.addFolder("saves", await Folder.getRootID(userID), userID)
+            await Folder.addFolder("saved", await Folder.getRootID(userID), userID)
         } catch (error) {
             console.log(error)
         }
@@ -31,6 +31,24 @@ class Folder {
     static async getRootID(userID) {
         const sql = `
             SELECT id FROM folder WHERE name='root' AND user_id=${userID};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+            // const result = [];
+            // rows.forEach(data => {
+            //     result.push(data.media);
+            // });
+
+            return rows[0].id;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async getSavedID(userID) {
+        const sql = `
+            SELECT id FROM folder WHERE name='saved' AND user_id=${userID};
         `;
 
         try {

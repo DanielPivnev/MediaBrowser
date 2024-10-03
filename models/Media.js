@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../config/db");
+const Folder = require("./Folder");
 
 class Media {
     static async getPublic() {
@@ -34,6 +35,28 @@ class Media {
             // });
 
             return rows;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async getPhotoTags(id) {
+        const sql = `
+            SELECT tag_id FROM tag_media WHERE media_id=${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+            if (rows.length) {
+                const result = [];
+                rows.forEach(data => {
+                    result.push(data.tag_id);
+                });
+    
+                return result;
+            } else {
+                return [];
+            }
         } catch (error) {
             console.log(error)
         }
@@ -78,29 +101,9 @@ class Media {
         }
     }
     
-    static async getPhotoById(id) {
-        const sql = `
-            SELECT media FROM media WHERE id=${id};
-        `;
-
-        try {
-            const [rows, columns] = await db.execute(sql);
-            // const result = [];
-            // rows.forEach(data => {
-            //     result.push(data.media);
-            // });
-
-            if (rows.length > 0) {
-                return rows[0].media;
-            } 
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    
     static async getPhotoNameById(id) {
         const sql = `
-            SELECT name FROM media WHERE id=${id};
+            SELECT name FROM media WHERE id='${id}';
         `;
 
         try {
@@ -132,6 +135,25 @@ class Media {
 
             return rows.length;
             // console.log(rows)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async savePhoto(id, newPath, userID) {
+        const sqlGetPhoto = `
+            SELECT * FROM media WHERE id=${id};
+        `;
+        
+        try {
+            const [rows, columns] = await db.execute(sqlGetPhoto);
+            if (rows.length) {
+                const img = rows[0];
+                const savedID = await Folder.getSavedID(userID);
+                const tags = await Media.getPhotoTags(id);
+
+                await Media.addPhoto(userID, savedID, img.name, img.description, tags, newPath, false);
+            }
         } catch (error) {
             console.log(error)
         }

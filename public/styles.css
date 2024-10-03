@@ -455,6 +455,10 @@
     width: 47%;
 }
 
+.photo-panel-action-color {
+    color: #172031;
+}
+
 .no-like {
     background-color: #ffffff;
     color: #172031;

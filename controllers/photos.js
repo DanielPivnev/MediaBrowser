@@ -1,5 +1,7 @@
 "use strict";
 
+const fs = require("fs");
+
 const render = require("../utils/Rendering");
 const Media = require("../models/Media");
 const Users = require("../models/Users");
@@ -39,6 +41,21 @@ exports.like = async (req, res) => {
   if (token && await Users.checkLogin(token) && !await Users.isAdmin(token)) {
     const userID = await Users.getIDByToken(token);
     await Users.like(req.params.id, userID);
+  }
+
+  res.redirect(`/images/${req.params.id}`);
+};
+
+exports.save = async (req, res) => {
+  const token = req.cookies["session-token"];
+  if (token && await Users.checkLogin(token) && !await Users.isAdmin(token)) {
+    const userID = await Users.getIDByToken(token);
+    const img = await Media.getPhotoById(req.params.id);
+    const filePath = render.joinPath(__dirname, "..", "public", "media", "images", img);
+    const newFileName = `${Date.now()}.${img.split(".").pop()}`;
+    const newFilePath = render.joinPath(__dirname, "..", "public", "media", "images", newFileName);
+    fs.writeFileSync(newFilePath, fs.readFileSync(filePath));
+    await Media.savePhoto(req.params.id, newFileName, userID);
   }
 
   res.redirect(`/images/${req.params.id}`);

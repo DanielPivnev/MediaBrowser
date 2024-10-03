@@ -10,14 +10,25 @@
 <body class="page">
 <div class="header-wrapper photo-header-wrapper">
     <div class="header">
-        <div class="logo">
+        <a class="logo link-none" href="/">
             <img src="../media/logo.png" class="logo-image">
             <p class="logo-name">MediaBrowser</p>
-        </div>
+        </a>
         <div class="account">
-            <!--            <img src="media/profile_default.png" class="profile-photo">-->
-            <p class="login">Log In</p>
-            <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+            {% if isAdmin %}
+                <a class="nav-link link-none" href="#">Administration</a>
+            {% endif %}
+            {% if isUser %}
+                <a class="nav-link link-none" href="/users/store">My Media</a>
+            {% endif %}
+            {% if isLogin %}
+                <img src="../media/profile_default.png" class="profile-photo">
+            {% else %}
+                <a class="link-none row" href="/login/">
+                    <p class="login">Log In</p>
+                    <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+                </a>
+            {% endif %}
         </div>
     </div>
     <form class="photo-search">
@@ -39,7 +50,7 @@
                     <i class="fa-regular fa-heart"></i>
                     {{likes}}
                 </a>
-                <a class="photo-panel-action">
+                <a class="photo-panel-action photo-panel-action-color link-none" href="/images/save/{{id}}">
                     <i class="fa-regular fa-bookmark"></i>
                     Save
                 </a>

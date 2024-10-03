@@ -10,21 +10,21 @@
 <body class="page">
 <div class="header-wrapper dirs-header-wrapper">
     <div class="header">
-        <div class="logo">
+        <a class="logo link-none" href="/">
             <img src="../media/logo.png" class="logo-image">
             <p class="logo-name">MediaBrowser</p>
-        </div>
+        </a>
         <div class="account">
             {% if isAdmin %}
                 <a class="nav-link link-none" href="#">Administration</a>
             {% endif %}
             {% if isUser %}
-                <a class="nav-link link-none" href="#">My Media</a>
+                <a class="nav-link link-none" href="/users/store">My Media</a>
             {% endif %}
             {% if isLogin %}
                 <img src="../media/profile_default.png" class="profile-photo">
             {% else %}
-                <a class="link-none row" href="http://localhost:5010/login/">
+                <a class="link-none row" href="/login/">
                     <p class="login">Log In</p>
                     <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
                 </a>
@@ -34,7 +34,7 @@
     <div class="utils">
         <div class="path">
             {% forEach path %}
-                <a href="http://localhost:5010/users/store?id={?id?}&path={?toPath?}" class="path-link link-none">{?name?}/</a>
+                <a href="/users/store?id={?id?}&path={?toPath?}" class="path-link link-none">{?name?}/</a>
             {% endforEach %}
         </div>
 
