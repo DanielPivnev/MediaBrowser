@@ -232,6 +232,21 @@
     font-size: 1em;
 }
 
+.tag:hover {
+    background-color: #ffffff;
+    color: #172031;
+}
+
+.tag-active {
+    background-color: #ffffff !important;
+    color: #172031 !important;
+}
+
+.tag-active:hover {
+    background-color: #172031 !important;
+    color: #ffffff !important;
+}
+
 .images {
     width: calc(100vw - 20px);
     column-count: 4;

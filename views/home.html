@@ -42,27 +42,9 @@
         </button>
     </form>
     <div class="tags">
-        <p class="tag">buildings</p>
-        <p class="tag">people</p>
-        <p class="tag">family</p>
-        <p class="tag">cars</p>
-        <p class="tag">animals</p>
-        <p class="tag">background</p>
-        <p class="tag">wallpaper</p>
-        <p class="tag">work</p>
-        <p class="tag">vacation</p>
-        <p class="tag">naturism</p>
-        <p class="tag">flowers</p>
-        <p class="tag">landscape</p>
-        <p class="tag">business</p>
-        <p class="tag">sport</p>
-        <p class="tag">politic</p>
-        <p class="tag">school</p>
-        <p class="tag">university</p>
-        <p class="tag">leisure</p>
-        <p class="tag">food</p>
-        <p class="tag">clothes</p>
-        <p class="tag">charity</p>
+        {% forEach tags %}
+            <a class="tag link-none {?isSelected?}" href="/?tags={{tagsQuery}}{?id?}">{?name?}</a>
+        {% endforEach %}
     </div>
 </div>
 <div class="home-content">

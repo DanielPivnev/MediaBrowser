@@ -11,12 +11,59 @@ const render = require("../utils/Rendering");
 
 exports.main = async (req, res) => {
     const context = {
-      images: await Media.getPublic(),
-      isLogin: false,
-      isAdmin: false,
-      isUser: false
+        images: await Media.getPublic(),
+        tags: await Media.getTags(),
+        isLogin: false,
+        isAdmin: false,
+        isUser: false,
+        tagsQuery: ""
     };
-    
+
+    if (req.query.tags) {
+        const selectedTags = req.query.tags.split(";");
+        context.tags.forEach(tag => {
+            let selected = false;
+            selectedTags.forEach(selectedTag => {
+                if (tag.id === +selectedTag && !selected) {
+                    context.tagsQuery = `${context.tagsQuery}${selectedTag};`;
+                    selected = true;
+                } else if (tag.id === +selectedTag && selected) {
+                    context.tagsQuery = context.tagsQuery.split(";").slice(0, -2).join(";");
+                    if (context.tagsQuery.length)
+                        context.tagsQuery = context.tagsQuery + ";";
+                    selected = false;
+                }
+            });
+            if (selected) {
+                tag.isSelected = "tag-active";
+            } else {
+                tag.isSelected = "";
+            }
+        });
+
+        if (context.tagsQuery.length) {
+            const selectedImgs = [];
+            context.images.forEach(async img => {
+                const tags = await Media.getPhotoTags(img.id);
+                let selected = false;
+                selectedTags.forEach(selectedTag => {
+                    tags.forEach(tag => {
+                        if (+selectedTag === tag && !selected) {
+                            selectedImgs.push(img);
+                            selected = true;
+                        }
+                    })
+                })
+            });
+            context.images = selectedImgs;
+        }
+    } else {
+        context.tags.forEach(tag => {
+            tag.isSelected = "";
+        });
+    }
+
+
     const token = req.cookies["session-token"];
     if (token && await Users.checkLogin(token)) {
         context.isLogin = true;
