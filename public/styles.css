@@ -243,11 +243,6 @@
     color: #172031 !important;
 }
 
-.tag-active:hover {
-    background-color: #172031 !important;
-    color: #ffffff !important;
-}
-
 .images {
     width: calc(100vw - 20px);
     column-count: 4;

@@ -19,14 +19,8 @@ exports.main = async (req, res) => {
         tagsQuery: "",
         searchQuery: ""
     };
-
-    if (req.query.search && req.query.search.length) {
-        context.images = context.images.filter(image => 
-            image.name.toLowerCase().includes(req.query.search.toLowerCase()) || 
-            image.description.toLowerCase().includes(req.query.search.toLowerCase())
-        );
-        context.searchQuery = `&search=${req.query.search}`;
-    }
+    console.log(";")
+    console.log(context.images)
 
     if (req.query.tags) {
         const selectedTags = req.query.tags.split(";");
@@ -53,16 +47,17 @@ exports.main = async (req, res) => {
         if (context.tagsQuery.length) {
             const selectedImgs = [];
             context.images.forEach(async img => {
-                const tags = await Media.getPhotoTags(img.id);
+                // const tags = await Media.getPhotoTags(img.id);
                 let selected = false;
                 selectedTags.forEach(selectedTag => {
-                    tags.forEach(tag => {
+                    img.tags.forEach(tag => {
                         if (+selectedTag === tag && !selected) {
                             selectedImgs.push(img);
                             selected = true;
-                            console.log("s")
+                    console.log(";")
                         }
                     })
+
                 })
             });
             context.images = selectedImgs;
@@ -74,6 +69,14 @@ exports.main = async (req, res) => {
     }
 
     context.tagsQuery = "tags=" + context.tagsQuery;
+
+    if (req.query.search && req.query.search.length) {
+        context.images = context.images.filter(image => 
+            image.name.toLowerCase().includes(req.query.search.toLowerCase()) || 
+            image.description.toLowerCase().includes(req.query.search.toLowerCase())
+        );
+        context.searchQuery = `&search=${req.query.search}`;
+    }
 
     const token = req.cookies["session-token"];
     if (token && await Users.checkLogin(token)) {

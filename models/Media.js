@@ -6,17 +6,34 @@ const Folder = require("./Folder");
 class Media {
     static async getPublic() {
         const sql = `
-            SELECT media, id, name, description FROM media WHERE public=TRUE;
+            SELECT media, id, name, description, tag_id FROM media LEFT JOIN tag_media ON id = media_id WHERE public=TRUE;
         `;
 
         try {
             const [rows, columns] = await db.execute(sql);
-            // const result = [];
-            // rows.forEach(data => {
-            //     result.push(data.media);
-            // });
+            // console.log(rows)
+            const result = {};
 
-            return rows;
+            rows.forEach(img => {
+                if (result[img.id] && img.tag_id) {
+                    result[img.id].tags.push(img.tag_id);
+                } else {
+                    result[img.id] = {};
+                    result[img.id].media = img.media;
+                    result[img.id].name = img.name;
+                    result[img.id].id = img.id;
+                    result[img.id].description = img.description;
+                    if (img.tag_id)
+                        result[img.id].tags = [img.tag_id];
+                    else
+                        result[img.id].tags = [];
+                }
+            });
+            // console.log(Object.values(result))
+
+            // rows = ;
+
+            return Object.values(result);
         } catch (error) {
             console.log(error)
         }
