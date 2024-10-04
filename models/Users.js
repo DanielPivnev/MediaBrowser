@@ -49,6 +49,48 @@ class Users {
         }
     }
 
+    static async getDataByID(id) {
+        const sql = `
+            SELECT email, f_name, l_name, profile FROM users WHERE id = ${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+
+            return rows[0];
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async getProfileByID(id) {
+        const sql = `
+            SELECT profile FROM users WHERE id = ${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+
+            return rows[0].profile;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async getPasswordByID(id) {
+        const sql = `
+            SELECT password FROM users WHERE id = ${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+
+            return rows[0].password;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static async getIDByToken(token) {
         const date = new Date();
         const sql = `
@@ -116,6 +158,18 @@ class Users {
     static async add(email, password) {
         const sql = `
             INSERT INTO users (users.email, users.password) VALUES ('${email}', '${password}');
+        `;
+
+        try {
+            await db.execute(sql);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async edit(email, password, firstname, lastname, profile, id) {
+        const sql = `
+            UPDATE users SET f_name = '${firstname}', l_name = '${lastname}', email = '${email}', profile = '${profile}', password = '${password}' WHERE (id = '${id}');
         `;
 
         try {

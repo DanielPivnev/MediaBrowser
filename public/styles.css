@@ -376,6 +376,7 @@
     font-size: 1em;
     text-transform: uppercase;
     cursor: pointer;
+    text-align: center;
 }
 
 .login-btn:hover {
@@ -418,6 +419,19 @@
 .photo-panel {
     margin-right: 30px;
     width: 25vw;
+    background-color: #fff;
+    border-radius: 25px;
+    height: min-content;
+    position: sticky;
+    top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-panel {
+    margin-right: 30px;
+    width: 70vw;
     background-color: #fff;
     border-radius: 25px;
     height: min-content;
@@ -522,8 +536,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin: 0 30px;
+}
+
+.imgEditBtn, .folderEditBtn {
+    cursor: pointer;
 }
 
 .folder-icon-wrapper {

@@ -4,7 +4,6 @@
     <link href="../styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
     <title>Directories</title>
 </head>
 <body class="page">
@@ -22,7 +21,9 @@
                 <a class="nav-link link-none" href="/users/store">My Media</a>
             {% endif %}
             {% if isLogin %}
-                <img src="../media/profile_default.png" class="profile-photo">
+                <a class="link-none" href="/users/profile">
+                    <img src="../media/profile_default.png" class="profile-photo">
+                </a>
             {% else %}
                 <a class="link-none row" href="/login/">
                     <p class="login">Log In</p>
@@ -41,12 +42,12 @@
         <div class="add">
             <button class="upload-btn" onclick="addFolderVisibility()">
                 Add Folder 
-                <i class="fa-solid fa-plus"></i>
+                <!-- <i class="fa-solid fa-plus"></i> -->
             </button>
     
             <button class="upload-btn" onclick="uploadImageVisibility()">
                 Upload Media 
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <!-- <i class="fa-solid fa-arrow-up-from-bracket"></i> -->
             </button>
         </div>
 
@@ -57,19 +58,32 @@
     {% forEach folders %}
         <a href="/users/store?id={?id?}&path={{pathSTR}}>{?name?};{?id?}" class="folder link-none">
             <div class="folder-icon-wrapper">
-                <i class="fa-regular fa-folder folder-icon"></i>
+                <img src="../media/folder.png" width="150" height="150">
+                <!-- <i class="fa-regular fa-folder folder-icon"></i> -->
             </div>
             <p class="folder-name folder-name">{?name?}</p>
         </a>
     {% endforEach %}
 
     {% forEach images %}
-        <a href="/images/{?id?}" class="folder link-none">
-            <div class="img-wrapper">
+        <div class="folder">
+            <a class="img-wrapper link-none" href="/images/{?id?}">
                 <img src="../media/images/{?media?}" class="dirs-img" alt="">
-            </div>
-            <p class="folder-name folder-name">name</p>
-        </a>
+            </a>
+            <p class="folder-name folder-name">
+                {?name?} | 
+                <span 
+                    class="imgEditBtn"
+                    data-name="{?name?}"
+                    data-desc="{?description?}"
+                    data-id="{?id?}"
+                    data-tags="{?tagsID?}"
+                    data-public="{?public?}"
+                >
+                    edit
+                </span>
+            </p>
+        </div>
     {% endforEach %}
     
     <!-- <div class="add-folder">
@@ -81,7 +95,8 @@
         <div class="upload-header">
             <p>Add Folder</p>
             <button class="upload-cancel" onclick="addFolderVisibility()">
-                <i class="fa-solid fa-xmark"></i>
+                <!-- <i class="fa-solid fa-xmark"></i> -->
+                 X
             </button>
         </div>
         <form class="upload-content login-form" action="/users/store/add-folder?id={{id}}&path={{pathSTR}}" method="POST">
@@ -97,19 +112,20 @@
         <div class="upload-header">
             <p>Upload Image</p>
             <button class="upload-cancel" onclick="uploadImageVisibility()">
-                <i class="fa-solid fa-xmark"></i>
+                <!-- <i class="fa-solid fa-xmark"></i> -->
+                 X
             </button>
         </div>
         <form class="upload-content login-form" enctype="multipart/form-data" action="/users/store/uploadImage?id={{id}}&path={{pathSTR}}" method="POST">
             <!-- <label class="login-lbl" for="nameInput">Name</label> -->
             <div class="dirs-tags">
                 {% forEach tags %}
-                    <p class="dirs-tag" id="{?id?}">{?name?}</p>
+                    <p class="dirs-tag upload-tag" id="{?id?}">{?name?}</p>
                 {% endforEach %}
             </div>
             
             <p class="file-inp" id="file-area">
-                <i class="fa-solid fa-image"></i>
+                <!-- <i class="fa-solid fa-image"></i> -->
                 <span class="" id="file-val">Select an image...</span>
             </p>
             <input class="login-inp" placeholder="Enter here a name..." id="nameInput" type="text" name="name">
@@ -127,6 +143,33 @@
             <button class="login-btn">upload image</button>
         </form>
     </div>
+    <div class="upload hide" id="edit-img">
+        <div class="upload-header">
+            <p>Edit Image</p>
+            <button class="upload-cancel" onclick="editImageVisibility()">
+                <!-- <i class="fa-solid fa-xmark"></i> -->
+                 X
+            </button>
+        </div>
+        <form class="upload-content login-form" action="/users/store/editImage?id={{id}}&path={{pathSTR}}" method="POST">
+            <!-- <label class="login-lbl" for="nameInput">Name</label> -->
+            <div class="dirs-tags">
+                {% forEach tags %}
+                    <p class="dirs-tag edit-tag" id="edit-tag-{?id?}">{?name?}</p>
+                {% endforEach %}
+            </div>
+            <input class="login-inp" placeholder="Enter here a name..." id="nameEditInput" type="text" name="name">
+            <textarea class="textarea-inp" placeholder="Enter here a description..." id="descEditInput" name="desc"></textarea>
+            <div class="checkbox">
+                <input id="publishEditInput" type="checkbox" name="isPublic">
+                <p>publish</p>
+            </div>
+            <input hidden id="tagsEditInput" type="text" name="tags">
+            <input hidden id="idEditInput" type="text" name="id">
+            <button class="login-btn">SAVE CHANGES</button>
+            <a class="login-btn link-none" id="deleteImage" href="/users/store/deleteImage/IMAGE_ID?id={{id}}&path={{pathSTR}}">delete image</a>
+        </form>
+    </div>
 </div>
 <div class="footer">
     <div class="logo-wrapper">
@@ -139,13 +182,13 @@
         <p class="copy-rights">&copy; MediaBrowser 2024. All rights reserved.</p>
     </div>
     <div class="follow-us-wrapper">
-        <p class="follow-us">
+        <!-- <p class="follow-us">
             follow us |
             <i class="fa-brands fa-square-facebook"></i>
             <i class="fa-brands fa-square-instagram"></i>
             <i class="fa-brands fa-square-x-twitter"></i>
             <i class="fa-brands fa-square-pinterest"></i>
-        </p>
+        </p> -->
     </div>
 </div>
 
@@ -153,12 +196,21 @@
     const upload = document.getElementById("upload-wrapper");
     const addFolder = document.getElementById("add-folder");
     const uploadImage = document.getElementById("upload-img");
-    const tags = document.querySelectorAll(".dirs-tag");
+    const editImage = document.getElementById("edit-img");
+    const tags = document.querySelectorAll(".upload-tag");
     const tagsInput = document.getElementById("img-tags");
     const fileInput = document.getElementById("fileInput");
     const fileArea = document.getElementById("file-area");
     const fileTxt = document.getElementById("file-val");
     const fileFormat = document.getElementById("file-format");
+    const nameEditInput = document.getElementById("nameEditInput");
+    const descEditInput = document.getElementById("descEditInput");
+    const publicEditInput = document.getElementById("publishEditInput");
+    const tagsEditInput = document.getElementById("tagsEditInput");
+    const idEditInput = document.getElementById("idEditInput");
+    const delImg = document.getElementById("deleteImage");
+    const tagsEdit = document.querySelectorAll(".edit-tag");
+    const editImgBtns = [...document.getElementsByClassName("imgEditBtn")];
 
     function uploadVisibility() {
         if (upload.classList.contains("hide")) {
@@ -203,7 +255,24 @@
             } 
         }
     }
-    
+
+    function editImageVisibility() {
+        uploadVisibility();
+
+        if (editImage.classList.contains("hide")) {
+            editImage.classList.remove("hide");
+            editImage.classList.add("show");
+        } else {
+            editImage.classList.remove("show");
+            editImage.classList.add("hide");
+            tagsEdit.forEach(tag => {
+                if (tag.classList.contains("dirs-tag-active")) {
+                    tag.classList.remove("dirs-tag-active");
+                } 
+            });
+        }
+    }
+        
 
     tags.forEach(tag => {
         tag.addEventListener("click", (tag) => {
@@ -218,6 +287,28 @@
                 idsArray.push(tagId);
             }
             tagsInput.value = idsArray.join(";");
+
+            if (tag.srcElement.classList.contains("dirs-tag-active")) {
+                tag.srcElement.classList.remove("dirs-tag-active");
+            } else {
+                tag.srcElement.classList.add("dirs-tag-active");
+            }
+        });
+    });
+
+    tagsEdit.forEach(tag => {
+        tag.addEventListener("click", (tag) => {
+            const tagId = tag.srcElement.id.split("-").pop();
+
+            let currentValue = tagsEditInput.value.trim();
+            let idsArray = currentValue ? currentValue.split(";").map(id => id.trim()) : [];
+
+            if (idsArray.includes(tagId)) {
+                idsArray = idsArray.filter(id => id !== tagId);
+            } else {
+                idsArray.push(tagId);
+            }
+            tagsEditInput.value = idsArray.join(";");
 
             if (tag.srcElement.classList.contains("dirs-tag-active")) {
                 tag.srcElement.classList.remove("dirs-tag-active");
@@ -247,6 +338,27 @@
             } 
         }
     });
+
+    editImgBtns.forEach((editImgBtn => {
+        editImgBtn.addEventListener("click", (btn) => {
+            const data = btn.srcElement.dataset;
+            
+            nameEditInput.value = data.name;
+            descEditInput.value = data.desc;
+            // tagsEditInput.value = data.tags;
+            idEditInput.value = data.id;
+            publicEditInput.checked = +data.public;
+            // console.log(data)
+            if (data.tags.length) {
+                data.tags.split(";").forEach(tagID =>  {
+                    document.getElementById(`edit-tag-${tagID}`).click();
+                });
+            }
+            delImg.setAttribute("href", delImg.getAttribute("href").replace("IMAGE_ID", data.id))
+
+            editImageVisibility();
+        });
+    }))
 </script>
 </body>
 </html>

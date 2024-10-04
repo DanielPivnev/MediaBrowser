@@ -4,7 +4,6 @@
     <link href="../styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
     <title>Photo</title>
 </head>
 <body class="page">
@@ -22,19 +21,22 @@
                 <a class="nav-link link-none" href="/users/store">My Media</a>
             {% endif %}
             {% if isLogin %}
-                <img src="../media/profile_default.png" class="profile-photo">
+                <a class="link-none" href="/users/profile">
+                    <img src="../media/profile_default.png" class="profile-photo">
+                </a>
             {% else %}
                 <a class="link-none row" href="/login/">
                     <p class="login">Log In</p>
-                    <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+                    <!-- <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i> -->
                 </a>
             {% endif %}
         </div>
     </div>
     <form class="photo-search" id="searchForm">
         <input class="search-input" id="searchInput" placeholder="search..." type="search" name="searchInput">
-        <button class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
+        <button class="search-btn"></button>
+            <img src="../media/search.png" width="40" height="40">
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
         </button>
     </form>
 </div>
@@ -47,22 +49,23 @@
         {% if isUser %}
             <div class="photo-panel-actions">
                 <a class="photo-panel-action link-none {{liked}}" href="/images/like/{{id}}">
-                    <i class="fa-regular fa-heart"></i>
-                    {{likes}}
+                    <!-- <i class="fa-regular fa-heart"></i> -->
+                    Likes: {{likes}}
                 </a>
                 <a class="photo-panel-action photo-panel-action-color link-none" href="/images/save/{{id}}">
-                    <i class="fa-regular fa-bookmark"></i>
+                    <!-- <i class="fa-regular fa-bookmark"></i> -->
                     Save
                 </a>
             </div>
         {% endif %}
-        <div class="photo-panel-user">
+        <!-- <div class="photo-panel-user">
             <img class="photo-panel-img" src="../media/profile_default.png" alt="">
             <p class="photo-panel-name">Helmut Becker</p>
-        </div>
+        </div> -->
         <p class="photo-panel-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mattis lacinia libero nec aliquet.
-            Sed tincidunt eros eget leo dapibus, in viverra felis pretium. Ut non orci consequat, venenatis massa.
+            {{name}}
+            <br/>
+            <i>{{desc}}</i>
         </p>
     </div>
 </div>
@@ -77,13 +80,13 @@
         <p class="copy-rights">&copy; MediaBrowser 2024. All rights reserved.</p>
     </div>
     <div class="follow-us-wrapper">
-        <p class="follow-us">
+        <!-- <p class="follow-us">
             follow us |
             <i class="fa-brands fa-square-facebook"></i>
             <i class="fa-brands fa-square-instagram"></i>
             <i class="fa-brands fa-square-x-twitter"></i>
             <i class="fa-brands fa-square-pinterest"></i>
-        </p>
+        </p> -->
     </div>
 </div>
 

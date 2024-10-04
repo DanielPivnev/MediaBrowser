@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Photo</title>
+</head>
+<body class="page">
+<div class="header-wrapper photo-header-wrapper">
+    <div class="header">
+        <a class="logo link-none" href="/">
+            <img src="../media/logo.png" class="logo-image">
+            <p class="logo-name">MediaBrowser</p>
+        </a>
+        <div class="account">
+            {% if isAdmin %}
+                <a class="nav-link link-none" href="#">Administration</a>
+            {% endif %}
+            {% if isUser %}
+                <a class="nav-link link-none" href="/users/store">My Media</a>
+            {% endif %}
+            {% if isLogin %}
+                <a class="link-none" href="/users/profile">
+                    <img src="../media/profile_default.png" class="profile-photo">
+                </a>
+            {% else %}
+                <a class="link-none row" href="/login/">
+                    <p class="login">Log In</p>
+                    <!-- <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i> -->
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="photo-content">
+    <div class="photo-picture">
+        <img class="photo-img" src="../media/profile/{{profileImg}}" alt="">
+    </div>
+    <div class="profile-panel">
+        <form class="login-form" enctype="multipart/form-data" action="/users/profile" method="POST">
+            <p class="file-inp" id="file-area">
+                <!-- <i class="fa-solid fa-image"></i> -->
+                <span class="" id="file-val">Select a profile image...</span>
+            </p>
+            <input hidden id="fileInput" type="file" name="file">
+            <input hidden id="file-format" type="text" name="format">
+            <label class="login-lbl" for="emailInput">Email</label>
+            <input class="login-inp" placeholder="Enter here your email..." id="emailInput" value="{{email}}" type="email" name="email">
+            <label class="login-lbl" for="fNameInput">First Name</label>
+            <input class="login-inp" placeholder="Enter here your first name..." id="fNameInput" value="{{firstName}}" type="text" name="fNameInput">
+            <label class="login-lbl" for="lNameInput">Last Name</label>
+            <input class="login-inp" placeholder="Enter here your last name..." id="lNameInput" value="{{lastName}}" type="text" name="lNameInput">
+            <label class="login-lbl" for="passwordInput">New Password</label>
+            <input class="login-inp" placeholder="Enter here a new password..." id="passwordInput" type="text" name="password">
+            <input class="login-btn" value="save changes" type="submit">
+        </form>
+        {% if isAdmin %}
+            <a class="login-btn link-none">delete account</a>
+        {% endif %}
+        <a class="login-btn link-none" href="/users/profile/logout">logout</a>
+    </div>
+</div>
+<div class="footer">
+    <div class="logo-wrapper">
+        <div class="logo">
+            <img src="../media/logo.png" class="logo-image">
+            <p class="logo-name">MediaBrowser</p>
+        </div>
+    </div>
+    <div class="copy-rights-wrapper">
+        <p class="copy-rights">&copy; MediaBrowser 2024. All rights reserved.</p>
+    </div>
+    <div class="follow-us-wrapper">
+        <!-- <p class="follow-us">
+            follow us |
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-square-x-twitter"></i>
+            <i class="fa-brands fa-square-pinterest"></i>
+        </p> -->
+    </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById("fileInput");
+    const fileArea = document.getElementById("file-area");
+    const fileTxt = document.getElementById("file-val");
+    const fileFormat = document.getElementById("file-format");
+
+    fileArea.addEventListener("click", () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+        const value = fileInput.files[0] ? fileInput.files[0].name : "";
+
+        if (value.length) {
+            fileTxt.textContent = value;
+            fileFormat.value = value.split(".")[1];
+            if (!fileArea.classList.contains("file-inp-active")) {
+                fileArea.classList.add("file-inp-active");
+            } 
+        } else {
+            fileTxt.textContent = "Select an image...";
+            if (fileArea.classList.contains("file-inp-active")) {
+                fileArea.classList.remove("file-inp-active");
+            } 
+        }
+    });
+</script>
+
+</body>
+</html>

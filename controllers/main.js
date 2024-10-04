@@ -19,8 +19,6 @@ exports.main = async (req, res) => {
         tagsQuery: "",
         searchQuery: ""
     };
-    console.log(";")
-    console.log(context.images)
 
     if (req.query.tags) {
         const selectedTags = req.query.tags.split(";");

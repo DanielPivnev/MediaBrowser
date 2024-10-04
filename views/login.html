@@ -4,11 +4,10 @@
     <link href="../styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
     <title>Sign In</title>
 </head>
 <body class="page login-page">
-<a class="logo link-none" href="http://localhost:5010/">
+<a class="logo link-none" href="/">
     <img src="../media/logo.png" class="logo-image">
     <p class="logo-name">MediaBrowser</p>
 </a>
@@ -18,7 +17,7 @@
         <p class="error">Either the password or the email is invalid!</p>
     {% endif %}
 
-    <form class="login-form" action="http://localhost:5010/login/" method="POST">
+    <form class="login-form" action="/login/" method="POST">
         <label class="login-lbl" for="emailInput">Email</label>
         <input class="login-inp" placeholder="Enter here your email..." id="emailInput" type="email" name="email">
         <label class="login-lbl" for="passwordInput">Password</label>
@@ -27,7 +26,7 @@
     </form>
     <p class="login-switch">
         New to MediaBrowser? 
-        <a class="login-switch-link link-none" href="http://localhost:5010/registration/">
+        <a class="login-switch-link link-none" href="/registration/">
             Create an account
         </a>
     </p>

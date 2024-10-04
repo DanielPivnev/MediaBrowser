@@ -4,7 +4,6 @@
     <link href="styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/370e61c9c8.js" crossorigin="anonymous"></script>
     <title>MediaBrowser</title>
 </head>
 <body class="page">
@@ -22,11 +21,13 @@
                 <a class="nav-link link-none" href="/users/store">My Media</a>
             {% endif %}
             {% if isLogin %}
-                <img src="media/profile_default.png" class="profile-photo">
+                <a class="link-none" href="/users/profile">
+                    <img src="media/profile_default.png" class="profile-photo">
+                </a>
             {% else %}
                 <a class="link-none row" href="/login/">
                     <p class="login">Log In</p>
-                    <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+                    <!-- <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i> -->
                 </a>
             {% endif %}
         </div>
@@ -38,7 +39,8 @@
     <form class="search" id="searchForm">
         <input class="search-input" placeholder="search..." id="searchInput" type="search" name="searchInput">
         <button class="search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <img src="media/search.png" width="30">
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
         </button>
     </form>
     <div class="tags">
@@ -55,7 +57,7 @@
             </a>
         {% endforEach %}
     </div>
-    <div class="pagination">
+    <!-- <div class="pagination">
         <a class="page-link">
             <i class="fa-solid fa-arrow-left page-link-text"></i>
         </a>
@@ -77,7 +79,7 @@
         <a class="page-link">
             <i class="fa-solid fa-arrow-right page-link-text"></i>
         </a>
-    </div>
+    </div> -->
 </div>
 <div class="footer">
     <div class="logo-wrapper">
@@ -90,13 +92,13 @@
         <p class="copy-rights">&copy; MediaBrowser 2024. All rights reserved.</p>
     </div>
     <div class="follow-us-wrapper">
-        <p class="follow-us">
+        <!-- <p class="follow-us">
             follow us |
             <i class="fa-brands fa-square-facebook"></i>
             <i class="fa-brands fa-square-instagram"></i>
             <i class="fa-brands fa-square-x-twitter"></i>
             <i class="fa-brands fa-square-pinterest"></i>
-        </p>
+        </p> -->
     </div>
 </div>
 

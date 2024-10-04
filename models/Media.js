@@ -82,17 +82,37 @@ class Media {
 
     static async getFolder(folder_id) {
         const sql = `
-            SELECT media, id FROM media INNER JOIN folder_media ON id = media_id WHERE folder_id=${folder_id};
+            SELECT media, id, description, name, tag_id, public FROM media INNER JOIN folder_media ON media.id = folder_media.media_id LEFT JOIN tag_media ON media.id = tag_media.media_id WHERE folder_media.folder_id=${folder_id};
         `;
 
         try {
             const [rows, columns] = await db.execute(sql);
-            // const result = [];
-            // rows.forEach(data => {
-            //     result.push(data.media);
-            // });
+            const result = {};
 
-            return rows;
+            rows.forEach(img => {
+                if (result[img.id] && img.tag_id) {
+                    if (result[img.id].tagsID.length)
+                        result[img.id].tagsID = result[img.id].tagsID + ";" + img.tag_id;
+                    else
+                        result[img.id].tagsID = "" + img.tag_id;
+                } else {
+                    result[img.id] = {};
+                    result[img.id].media = img.media;
+                    result[img.id].name = img.name;
+                    result[img.id].id = img.id;
+                    result[img.id].description = img.description;
+                    result[img.id].public = "" + img.public;
+                    result[img.id].tagsID = "";
+                    if (img.tag_id)
+                        result[img.id].tagsID = "" + img.tag_id;
+                        
+                }
+            });
+            // console.log(Object.values(result))
+
+            // rows = ;
+
+            return Object.values(result);
         } catch (error) {
             console.log(error)
         }
@@ -112,6 +132,46 @@ class Media {
 
             if (rows.length > 0) {
                 return rows[0].media;
+            } 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async getNamePhotoById(id) {
+        const sql = `
+            SELECT name FROM media WHERE id=${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+            // const result = [];
+            // rows.forEach(data => {
+            //     result.push(data.media);
+            // });
+
+            if (rows.length > 0) {
+                return rows[0].name;
+            } 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async getDescPhotoById(id) {
+        const sql = `
+            SELECT description FROM media WHERE id=${id};
+        `;
+
+        try {
+            const [rows, columns] = await db.execute(sql);
+            // const result = [];
+            // rows.forEach(data => {
+            //     result.push(data.media);
+            // });
+
+            if (rows.length > 0) {
+                return rows[0].description;
             } 
         } catch (error) {
             console.log(error)
@@ -201,6 +261,47 @@ class Media {
 
                 await db.execute(sqlAddTag);
             });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async editPhoto(isPublic, name, id, tags, desc) {
+        isPublic = isPublic === "on" ? 1 : 0;
+        const sqlImgEdit = `
+            UPDATE media SET description = '${desc}', name = '${name}', public = ${isPublic} WHERE (id = ${id});
+        `;
+        const sqlDeleteTags = `
+            DELETE FROM tag_media WHERE (media_id = ${id});
+        `;
+        
+        try {
+            await db.execute(sqlImgEdit);
+            const oldTags = await Media.getPhotoTags(id);
+            if (oldTags.length) {
+                await db.execute(sqlDeleteTags);
+            }
+            if (tags.length) {
+                tags.split(";").forEach(async (tag) => {
+                    const sqlAddTag = `
+                        INSERT INTO tag_media (tag_id, media_id) VALUES (${tag}, ${id});
+                    `;
+
+                    await db.execute(sqlAddTag);
+                });
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async delete(id) {
+        const sql = `
+            DELETE FROM media WHERE (id = ${id});
+        `;
+
+        try {
+            await db.execute(sql);
         } catch (error) {
             console.log(error)
         }

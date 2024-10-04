@@ -9,6 +9,8 @@ const Users = require("../models/Users");
 exports.photo = async (req, res) => {
     const context = {
       image: await Media.getPhotoById(req.params.id),
+      name: await Media.getNamePhotoById(req.params.id),
+      desc: await Media.getDescPhotoById(req.params.id),
       isLogin: false,
       isAdmin: false,
       isUser: false,
